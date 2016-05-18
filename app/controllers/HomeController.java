@@ -23,7 +23,7 @@ public class HomeController extends Controller {
     public Result tasks() {
     	return ok(tasks.render());
     }
-    public Result html() {
-    	return ok(html.rendr());
+    public Result help() {
+    	return ok(help.render());
     }
 }
