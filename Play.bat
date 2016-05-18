@@ -1,0 +1,1 @@
+activator -Dhttp.port=80 -jvm-debug 9999 run
