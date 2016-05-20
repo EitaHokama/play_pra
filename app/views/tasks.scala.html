@@ -1,7 +1,9 @@
 @(message: String)
 
+@var str = "String";
 @common("今持っているタスク"){
 	@for(ss : String <-message.split("\n")){
 		@ss <br>}
+	@str
 
 }
