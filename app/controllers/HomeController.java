@@ -21,7 +21,7 @@ public class HomeController extends Controller {
     }
 
     public Result tasks() {
-    	return ok(tasks.render("Task List"));
+    	return ok(tasks.render("Task List\n tasks"));
     }
     public Result help() {
     	return ok(help.render());
