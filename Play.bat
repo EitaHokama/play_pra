@@ -1,1 +1,1 @@
-activator -Dhttp.port=80 -jvm-debug 9999 run
+activator -Dhttp.port=80 -jvm-debug 9999 h2-browser run
