@@ -13,4 +13,6 @@ public class Task extends Model {
 	public Integer id;
 	public String name;
 	public Date period;
+
+	public static Find<Integer, Task> find = new Find<Integer, Task>(){};
 }

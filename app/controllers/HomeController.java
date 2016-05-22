@@ -40,7 +40,7 @@ public class HomeController extends Controller {
     	task.period = new Date();
     	task.save();
 
-    	List<String> taskList = Arrays.asList("foo", "bar", "baz");
+    	List<Task> taskList = task.find.all();
     	return ok(tasks.render(taskList));
     }
     public Result help() {

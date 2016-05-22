@@ -1,9 +1,16 @@
-@(message: List[String])
+@(taskList: List[Task])
 
 @common("今持っているタスク"){
-	@for(ss : String <-message){
-		@ss <br>}
-		<br>
+	<h1>タスク一覧</h1>
 
+	@if(taskList.isEmpty()){
+		Taskは一件もありません
+	} else {
+		<ul>
+		@for(task <- taskList){
+			<li>@task.name</li>
+		}
+		</ul>
+	}
 
 }
