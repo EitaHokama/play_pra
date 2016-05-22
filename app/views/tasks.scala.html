@@ -1,6 +1,15 @@
 @(taskList: List[Task])
 
 @common("今持っているタスク"){
+	<h2>Add a new task</h2>
+
+	<form action="@routes.HomeController.createTask()" method="POST">
+		<p>
+			name: <input type="text" name="name" />
+		</p>
+		<input type="submit" value="Create" />
+	</form>
+
 	<h1>タスク一覧</h1>
 
 	@if(taskList.isEmpty()){

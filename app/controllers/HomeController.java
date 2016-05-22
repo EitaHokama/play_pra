@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import models.Task;
@@ -40,10 +41,18 @@ public class HomeController extends Controller {
     	Task task = new Task();
     	task.name = "ピザを"+ rnd.nextInt(10) + "枚食べる";
     	task.period = new Date();
-    	task.save();
+    	//task.save();
 
     	List<Task> taskList = task.find.all();
     	return ok(tasks.render(taskList));
+    }
+    public Result createTask() {
+    	Map<String, String[]> params = request().body().asFormUrlEncoded();
+
+    	Task newTask = new Task();
+    	newTask.name = params.get("name")[0];
+    	newTask.save();
+    	return redirect(routes.HomeController.tasks());
     }
     public Result help() {
     	return ok(help.render());
