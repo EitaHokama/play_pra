@@ -1,8 +1,11 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
+import models.Task;
 import play.mvc.*;
 
 import views.html.*;
@@ -23,13 +26,22 @@ public class HomeController extends Controller {
         return ok(index.render("Your new application is ready."));
     }
 
-    public Result tasks() {
+/*    public Result tasks() {
     	List<Object> FizzBuzz = new ArrayList<>();
     	for(int i=1;i<=50;i++){
     		FizzBuzz.add(i);
     	}
 
     	return ok(tasks.render("Task List\n tasks",FizzBuzz));
+    }*/
+    public Result tasks() {
+    	Task task = new Task();
+    	task.name = "Pizza を食べる";
+    	task.period = new Date();
+    	task.save();
+
+    	List<String> taskList = Arrays.asList("foo", "bar", "baz");
+    	return ok(tasks.render(taskList));
     }
     public Result help() {
     	return ok(help.render());

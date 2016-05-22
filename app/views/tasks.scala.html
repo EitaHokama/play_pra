@@ -1,24 +1,9 @@
-@(message: String, FizzBuzz: List[Int])
+@(message: List[String])
 
 @common("今持っているタスク"){
-	@for(ss : String <-message.split("\n")){
+	@for(ss : String <-message){
 		@ss <br>}
 		<br>
-		@for(i <- FizzBuzz){
-			@if(i%15==0){
-			FizzBuzz
-			} else {
-				@if(i%5==0){
-				Buzz
-				} else {
-					@if(i%3==0){
-					Fizz
-					} else {
-						@i
-					}
-				}
-			}
-			<br>
-		}
+
 
 }
