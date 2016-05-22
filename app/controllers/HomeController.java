@@ -7,7 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.inject.Inject;
+
 import models.Task;
+import play.data.FormFactory;
+import play.data.Form;
 import play.mvc.*;
 
 import views.html.*;
@@ -17,6 +21,8 @@ import views.html.*;
  * to the application's home page.
  */
 public class HomeController extends Controller {
+	@Inject
+	private FormFactory formFactory;
 
     /**
      * An action that renders an HTML page with a welcome message.
@@ -47,12 +53,14 @@ public class HomeController extends Controller {
     	return ok(tasks.render(taskList));
     }
     public Result createTask() {
-    	Map<String, String[]> params = request().body().asFormUrlEncoded();
-
-    	Task newTask = new Task();
-    	newTask.name = params.get("name")[0];
-    	newTask.save();
-    	return redirect(routes.HomeController.tasks());
+    	Form<Task> taskForm = formFactory.form(Task.class).bindFromRequest();
+    	if(taskForm.hasErrors()){
+    		return badRequest(taskForm.errorsAsJson());
+    	}else{
+    		Task newTask = taskForm.get();
+    		newTask.save();
+    		return redirect(routes.HomeController.tasks());
+    	}
     }
     public Result help() {
     	return ok(help.render());
