@@ -50,12 +50,13 @@ public class HomeController extends Controller {
     	//task.save();
 
     	List<Task> taskList = task.find.all();
-    	return ok(tasks.render(taskList));
+    	return ok(tasks.render(taskList, formFactory.form(Task.class)));
     }
     public Result createTask() {
     	Form<Task> taskForm = formFactory.form(Task.class).bindFromRequest();
     	if(taskForm.hasErrors()){
-    		return badRequest(taskForm.errorsAsJson());
+    		List<Task> taskList = Task.find.all();
+    		return badRequest(tasks.render(taskList, taskForm));
     	}else{
     		Task newTask = taskForm.get();
     		newTask.save();

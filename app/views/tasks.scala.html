@@ -1,14 +1,19 @@
-@(taskList: List[Task])
+@(taskList: List[Task], taskForm: Form[Task])
+
+@import helper._
 
 @common("今持っているタスク"){
 	<h2>Add a new task</h2>
+		<!-- name に関するエラーがあったら表示する -->
+			@for(error <- taskForm("name").errors) {
+		<p>@error.message</p>
+	}
 
-	<form action="@routes.HomeController.createTask()" method="POST">
-		<p>
-			name: <input type="text" name="name" />
-		</p>
+	@form(routes.HomeController.createTask()) {
+		@inputText(taskForm("name", '_lavel -> "タスク名"))
+		@inputDate(taskForm("period", '_lavel -> "期限"))
 		<input type="submit" value="Create" />
-	</form>
+	}
 
 	<h1>タスク一覧</h1>
 
@@ -17,7 +22,7 @@
 	} else {
 		<ul>
 		@for(task <- taskList){
-			<li>@task.name</li>
+			<li>@task.name @task.period</li>
 		}
 		</ul>
 	}
