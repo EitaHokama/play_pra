@@ -1,5 +1,8 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import play.mvc.*;
 
 import views.html.*;
@@ -21,7 +24,12 @@ public class HomeController extends Controller {
     }
 
     public Result tasks() {
-    	return ok(tasks.render("Task List\n tasks"));
+    	List<Object> FizzBuzz = new ArrayList<>();
+    	for(int i=1;i<=50;i++){
+    		FizzBuzz.add(i);
+    	}
+
+    	return ok(tasks.render("Task List\n tasks",FizzBuzz));
     }
     public Result help() {
     	return ok(help.render());
